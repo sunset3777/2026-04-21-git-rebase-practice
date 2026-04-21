@@ -23,6 +23,10 @@ main {
   padding: 40px 24px;
 }
 
+.hero p {
+  font-size: 18px;
+}
+
 footer {
   background-color: #f0f0f0;
   padding: 16px 24px;

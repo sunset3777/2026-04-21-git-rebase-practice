@@ -10,10 +10,13 @@
 
 | # | 情境 | 學習指令 | 難度 |
 |---|---|---|---|
-| 01 | [工作做到一半，任務來了](./tasks/01-stash.md) | `git stash` | ⭐ |
-| 02 | [commit 錯了，怎麼辦？](./tasks/02-reset.md) | `git reset` | ⭐⭐ |
-| 03 | [只想要那一個 commit](./tasks/03-cherry-pick.md) | `git cherry-pick` | ⭐⭐⭐ |
-| 04 | [推送被拒絕了](./tasks/04-force-push.md) | `git push --force` | ⭐⭐⭐ |
+| 01 | [工作做到一半，任務來了](./01-stash.md) | `git stash` | ⭐ |
+| 02 | [commit 錯了，怎麼辦？](./02-reset.md) | `git reset` | ⭐⭐ |
+| 03 | [只想要那一個 commit](./03-cherry-pick.md) | `git cherry-pick` | ⭐⭐⭐ |
+| 04 | [推送被拒絕了](./04-force-push.md) | `git push --force` | ⭐⭐⭐ |
+| 05 | [讓 commit 歷史變漂亮](./05-rebase.md) | `git rebase` | ⭐⭐⭐⭐ |
+| 06 | [多人同步開發生存法則](./06-sync-dev.md) | `git pull --rebase` | ⭐⭐⭐⭐ |
+| 07 | [Approve 機制與審核](./07-review.md) | PR / Code Review | ⭐⭐ |
 
 建議依序完成，每個情境都會用到前面建立的觀念。
 
@@ -72,7 +75,7 @@ git checkout -b feature-your-name
 
 ## 💬 遇到問題？
 
-- 先試著自己查 `git status` 和 `git log --oneline`，通常能找到線索。
+- 先試著自己查 `git status` 和 `git log --online`，通常能找到線索。
 - 真的卡住了再找協作者討論。
 - 任何操作都可以還原——除了 `reset --hard` 和 `force push` 之後要特別小心。
 

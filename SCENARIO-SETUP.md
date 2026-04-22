@@ -12,9 +12,7 @@
 1. **更新 main：**
    ```bash
    git checkout main
-   echo "Update on main" >> README.md
-   git add README.md
-   git commit -m "Update README on main"
+   echo "Update on main" >> README.md && git add . && git commit -m "Update README on main"
    ```
 2. **建立練習分支與亂 commit：**
    ```bash
@@ -27,35 +25,36 @@
 
 ---
 
-## 🏗️ 佈置情境 06：多人同步開發 (Pull Rebase)
+## 🏗️ 佈置情境 06：多人同步開發 (單人模擬版)
 
-**目的：** 模擬你跟遠端（夥伴）同時修改了同一個分支的情況。
+**目的：** 模擬你在開發時，夥伴已經搶先一步 Push 到遠端的情境。即使沒有遠端 Repo，我們也能透過「切換分支」來完美模擬。
 
 ### 操作步驟：
-1. **建立共用分支：**
+1. **第一步：扮演「夥伴」（右手）**
+   我們先在 `feature-shared` 分支上寫好一段內容。
    ```bash
    git checkout main
    git checkout -b feature-shared
+   echo "Partner: 我改了第一行" > index.html
+   git add index.html
+   git commit -m "Partner's update"
    ```
-2. **建立你的本地 commit：**
+2. **第二步：扮演「你自己」（左手）**
+   我們要「回到過去」夥伴還沒動手前，來開發你的新功能。
    ```bash
-   echo "My local change" >> index.html
+   # 回到 main 分支起點，開一個新分支代表你自己的進度
+   git checkout -b my-work main
+   # 寫下你的內容（故意改同一行來製造衝突）
+   echo "Me: 我也改了第一行" > index.html
    git add index.html
    git commit -m "My feature work"
    ```
-3. **模擬遠端（夥伴）已經 Push 了：**
-   此處我們手動移動 `origin` 的指標（進階操作）：
-   ```bash
-   git branch partner-work
-   echo "Partner's change" >> index.html
-   git add index.html
-   git commit -m "Partner's update on shared branch"
-   # 將本地的 origin 指向這個新的 commit
-   git update-ref refs/remotes/origin/feature-shared HEAD
-   # 回到你原本的 commit 狀態
-   git reset --hard HEAD~1
-   ```
-4. **完成！** 輸入 `git log --all --oneline --graph`，你會看到你的 commit 跟 origin 分叉了。
+3. **完成佈置！** 請輸入 `git log --oneline --graph --all`。
+   你會看到 `my-work` 與 `feature-shared` 分叉成兩條平行線了！
+
+### 💡 如何開始練習：
+請在 `my-work` 分支執行：`git rebase feature-shared`。
+這就等同於在真實環境中執行 `git pull --rebase`。
 
 ---
 
@@ -66,7 +65,7 @@
 ### 操作步驟：
 1. **Push 分支：** 將你的練習分支推送到 GitHub。
    ```bash
-   git push origin test-rebase
+   git push origin my-work
    ```
 2. **開啟網頁：** 到 GitHub Repo 頁面，點擊 **"Pull requests"** -> **"New pull request"**。
 3. **設定保護：** 
@@ -81,9 +80,8 @@
 
 ## 🧹 如何重來？
 
-如果練習弄爛了想重來，最快的方法是刪除分支：
+如果練習弄爛了想重來，最快的方法是刪除測試分支：
 ```bash
 git checkout main
-git branch -D test-rebase feature-shared
+git branch -D test-rebase feature-shared my-work
 ```
-然後重新執行上述步驟即可。
